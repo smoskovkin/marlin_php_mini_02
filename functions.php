@@ -273,27 +273,25 @@ function get_users_from_db()
 
 function show_users_from_db()
 {
-    $users = get_users_from_db();
+    $users_list = get_users_from_db();
 
-    foreach ($users as $user) {
+    show_users($users_list);
 
-        echo "
-	        <div class='$user[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
-	            <img src='$user[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
-	            <div class='ml-2 mr-3'>
-	                <h5 class='m-0'>
-	                    $user[name] ($user[technology_stack])
-	                    <small class='m-0 fw-300'>
-	                        $user[position]
-	                    </small>
-	                </h5>
-	                <a href='$user[social_1_name]' class='text-info fs-sm' target='_blank'>$user[social_1_name]</a> -
-	                <a href='$user[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
-	            </div>
-	        </div>
-    	";
-    	
-	}
-
-
+//    foreach ($users as $user) {
+//        echo "
+//	        <div class='$user[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
+//	            <img src='$user[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
+//	            <div class='ml-2 mr-3'>
+//	                <h5 class='m-0'>
+//	                    $user[name] ($user[technology_stack])
+//	                    <small class='m-0 fw-300'>
+//	                        $user[position]
+//	                    </small>
+//	                </h5>
+//	                <a href='$user[social_1_name]' class='text-info fs-sm' target='_blank'>$user[social_1_name]</a> -
+//	                <a href='$user[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
+//	            </div>
+//	        </div>
+//    	";
+//    }
 }
