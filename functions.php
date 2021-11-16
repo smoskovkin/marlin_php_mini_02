@@ -173,7 +173,7 @@ $users_list = array(
         'name'             => 'Jos K.',
         'technology_stack' => 'ASP.NET Developer',
         'position'         => 'Partner &amp; Contributor',
-        'social_1_name'    => 'u@atlantez',
+        'social_1_name'    => '@atlantez',
         'social_1_link'    => 'https://twitter.com/@atlantez',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/Walapa',
@@ -295,3 +295,48 @@ function show_users_from_db()
 //    	";
 //    }
 }
+
+
+/*Задание 8*/
+
+
+	function show_users_table() {
+
+        $users_list = get_users_from_db();
+        $row_counter = 0;
+
+        foreach ($users_list as $list_item) {
+
+            ++$row_counter;
+
+        	$fullname = explode(' ', $list_item['name']);
+
+        	$first_name = $fullname[0];
+        	$last_name = $fullname[1];
+        	$user_name = $list_item['social_1_name'];
+        	$user_id = $list_item['id'];
+
+//        	echo '<pre>';
+//        	var_dump($first_name);
+//        	var_dump($last_name);
+//        	var_dump($user_name);
+//        	var_dump($user_id);
+//        	echo '</pre>';
+
+        	echo "
+        	    <tr>
+                    <th scope='row'>$row_counter</th>
+                    <td>$first_name</td>
+                    <td>$last_name</td>
+                    <td>$user_name</td>
+                    <td>
+                        <a href='show.php?id=$user_id' class='btn btn-info'>Редактировать</a>
+                        <a href='edit.php?id=$user_id' class='btn btn-warning'>Изменить</a>
+                        <a href='delete.php?id=$user_id' class='btn btn-danger'>Удалить</a>
+                    </td>
+                </tr>
+        	";
+
+        }
+
+    }
