@@ -311,9 +311,9 @@ function show_users_from_db()
 
         	$fullname = explode(' ', $list_item['name']);
 
-        	$first_name = $fullname[0];
-        	$last_name = $fullname[1];
-        	$user_name = $list_item['social_1_name'];
+        	$user_last_name = $fullname[0];
+        	$user_first_name = $fullname[1];
+        	$user_nick_name = $list_item['social_1_name'];
         	$user_id = $list_item['id'];
 
 //        	echo '<pre>';
@@ -326,9 +326,9 @@ function show_users_from_db()
         	echo "
         	    <tr>
                     <th scope='row'>$row_counter</th>
-                    <td>$first_name</td>
-                    <td>$last_name</td>
-                    <td>$user_name</td>
+                    <td>$user_last_name</td>
+                    <td>$user_first_name</td>
+                    <td>$user_nick_name</td>
                     <td>
                         <a href='show.php?id=$user_id' class='btn btn-info'>Редактировать</a>
                         <a href='edit.php?id=$user_id' class='btn btn-warning'>Изменить</a>
