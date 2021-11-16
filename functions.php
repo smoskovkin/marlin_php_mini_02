@@ -153,7 +153,7 @@ function show_content($content_list) {
 }
 
 
-/*Задание 5*/
+/*Задание 5, 6*/
 
 
 $users_list = array(
@@ -209,96 +209,91 @@ function show_users($users_list)
     foreach ($users_list as $list_item) {
 
     	echo "
-    	<div class='$list_item[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
-            <img src='$list_item[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
-            <div class='ml-2 mr-3'>
-                <h5 class='m-0'>
-                    $list_item[name] ($list_item[technology_stack])
-                    <small class='m-0 fw-300'>
-                        $list_item[position]
-                    </small>
-                </h5>
-                <a href='$list_item[social_1_name]' class='text-info fs-sm' target='_blank'>$list_item[social_1_name]</a> -
-                <a href='$list_item[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
-            </div>
-        </div>
+	        <div class='$list_item[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
+	            <img src='$list_item[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
+	            <div class='ml-2 mr-3'>
+	                <h5 class='m-0'>
+	                    $list_item[name] ($list_item[technology_stack])
+	                    <small class='m-0 fw-300'>
+	                        $list_item[position]
+	                    </small>
+	                </h5>
+	                <a href='$list_item[social_1_name]' class='text-info fs-sm' target='_blank'>$list_item[social_1_name]</a> -
+	                <a href='$list_item[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
+	            </div>
+	        </div>
     	";
     	
     }
 }
 
 
+/*Задание 7*/
 
 
-function show_active_users($users_list)
+function db_query()
 {
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $name = 'marlin-mini-2';
 
+    $link = mysqli_connect($host, $user, $pass, $name);
+    mysqli_query($link, "SET NAMES 'utf8'");
+
+//    $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
+
+    return $link;
+}
+
+
+function add_users_to_db_from_array($users_list)
+{
     foreach ($users_list as $list_item) {
-        if ( ($list_item['active_status'] == true)) {
-            ?>
-			<div
-				class="banned rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-				<img src="<?php
-                echo $list_item['photo']; ?>" alt="Jovanni Lo" class="img-thumbnail img-responsive rounded-circle"
-				     style="width:5rem; height: 5rem;">
-				<div class="ml-2 mr-3">
-					<h5 class="m-0">
-                        <?php
-                        echo $list_item['name'].' '.$list_item['technology_stack']; ?>
-						<small class="m-0 fw-300">
-                            <?php
-                            echo $list_item['position']; ?>
-						</small>
-					</h5>
-					<a href="<?php
-                    echo $list_item['social_1_link']; ?>" class="text-info fs-sm" target="_blank"><?php
-                        echo $list_item['social_1_name']; ?></a> -
-					<a href="<?php
-                    echo $list_item['social_2_link']; ?>" class="text-info fs-sm" target="_blank"
-					   title="Contact Jovanni"><i class="fal fa-envelope"></i></a>
-				</div>
-			</div>
-            <?php
-        }
+        $link = db_query();
+        $user = implode("','", $list_item);
 
-        elseif ( ($list_item['active_status'] == false)) { ?>
+        $sql_query = "INSERT INTO users VALUES (NULL, '$user')";
 
-		<div
-			class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-			<img src="<?php
-            echo $list_item['photo']; ?>" alt="Jovanni Lo" class="img-thumbnail img-responsive rounded-circle"
-			     style="width:5rem; height: 5rem;">
-			<div class="ml-2 mr-3">
-				<h5 class="m-0">
-                    <?php
-                    echo $list_item['name'].' '.$list_item['technology_stack']; ?>
-					<small class="m-0 fw-300">
-                        <?php
-                        echo $list_item['position']; ?>
-					</small>
-				</h5>
-				<a href="<?php
-                echo $list_item['social_1_link']; ?>" class="text-info fs-sm" target="_blank"><?php
-                    echo $list_item['social_1_name']; ?></a> -
-				<a href="<?php
-                echo $list_item['social_2_link']; ?>" class="text-info fs-sm" target="_blank" title="Contact Jovanni"><i
-						class="fal fa-envelope"></i></a>
-			</div>
-		</div>
-        <?php
-        }
+        mysqli_query($link, $sql_query) or die(mysqli_error($link));
     }
 }
 
 
-/*Задание 6*/
-
-function user_is_active($user)
+function get_users_from_db()
 {
-    if ( ! ($user['active_status'] === 'true')) {
-        return false;
-    }
+    $link      = db_query();
+    $sql_query = "SELECT * FROM users";
 
-    return true;
+    $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
+
+    return $result;
 }
-/*смотри задание 5*/
+
+
+function show_users_from_db()
+{
+    $users = get_users_from_db();
+
+    foreach ($users as $user) {
+
+        echo "
+	        <div class='$user[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
+	            <img src='$user[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
+	            <div class='ml-2 mr-3'>
+	                <h5 class='m-0'>
+	                    $user[name] ($user[technology_stack])
+	                    <small class='m-0 fw-300'>
+	                        $user[position]
+	                    </small>
+	                </h5>
+	                <a href='$user[social_1_name]' class='text-info fs-sm' target='_blank'>$user[social_1_name]</a> -
+	                <a href='$user[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
+	            </div>
+	        </div>
+    	";
+    	
+	}
+
+
+}
