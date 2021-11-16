@@ -166,7 +166,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@myplaneticket',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/myorange',
-        'active_status'    => false,
+        'banned_status'    => '',
     ),
     array(
         'photo'            => 'img/demo/authors/josh.png',
@@ -177,7 +177,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@atlantez',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/Walapa',
-        'active_status'    => true,
+        'banned_status'    => 'banned',
     ),
     array(
         'photo'            => 'img/demo/authors/jovanni.png',
@@ -188,18 +188,18 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@lodev09',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/lodev09',
-        'active_status'    => true,
+        'banned_status'    => 'banned',
     ),
     array(
         'photo'            => 'img/demo/authors/roberto.png',
         'name'             => 'Roberto R.',
         'technology_stack' => 'Rails Developer',
         'position'         => 'Partner &amp; Contributor',
-        'social_1_name'    => '@lodev09',
+        'social_1_name'    => '@sildur',
         'social_1_link'    => 'https://twitter.com/@sildur',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/sildur',
-        'active_status'    => false,
+        'banned_status'    => 'banned',
     ),
 );
 
@@ -207,30 +207,23 @@ $users_list = array(
 function show_users($users_list)
 {
     foreach ($users_list as $list_item) {
-        ?>
-		<div
-			class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-			<img src="<?php
-            echo $list_item['photo']; ?>" alt="Jovanni Lo" class="img-thumbnail img-responsive rounded-circle"
-			     style="width:5rem; height: 5rem;">
-			<div class="ml-2 mr-3">
-				<h5 class="m-0">
-                    <?php
-                    echo $list_item['name'].' '.$list_item['technology_stack']; ?>
-					<small class="m-0 fw-300">
-                        <?php
-                        echo $list_item['position']; ?>
-					</small>
-				</h5>
-				<a href="<?php
-                echo $list_item['social_1_link']; ?>" class="text-info fs-sm" target="_blank"><?php
-                    echo $list_item['social_1_name']; ?></a> -
-				<a href="<?php
-                echo $list_item['social_2_link']; ?>" class="text-info fs-sm" target="_blank" title="Contact Jovanni"><i
-						class="fal fa-envelope"></i></a>
-			</div>
-		</div>
-        <?php
+
+    	echo "
+    	<div class='$list_item[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
+            <img src='$list_item[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
+            <div class='ml-2 mr-3'>
+                <h5 class='m-0'>
+                    $list_item[name] ($list_item[technology_stack])
+                    <small class='m-0 fw-300'>
+                        $list_item[position]
+                    </small>
+                </h5>
+                <a href='$list_item[social_1_name]' class='text-info fs-sm' target='_blank'>$list_item[social_1_name]</a> -
+                <a href='$list_item[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
+            </div>
+        </div>
+    	";
+    	
     }
 }
 

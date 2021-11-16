@@ -41,9 +41,8 @@ include 'functions.php';
                         <div class="panel-content">
                            <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
 
-	                           <?php show_active_users($users_list); ?>
+                               <?php show_users($users_list); ?>
 
-                            </div>
                         </div>
                         </div>
                     </div>
