@@ -1,6 +1,7 @@
 <?php
 
 
+
 /*Задание 1*/
 
 $filter_list = array('Reports', 'Analytics', 'Export', 'Storage');
@@ -37,7 +38,6 @@ function show_filter_list($filter_list)
     }
 }
 
-//show_filter_list($filter_list);
 
 
 /*Задание 2*/
@@ -66,11 +66,9 @@ function show_posts($posts_list)
     }
 }
 
-//show_posts($posts_list);
 
 
 /*Задание 3*/
-
 
 $breadcrumbs_list = array('Главная', 'PHP', 'Функции', 'implode');
 
@@ -99,7 +97,6 @@ function show_breadcrumbs($breadcrumbs_list)
     <?php
 }
 
-//show_breadcrumbs($breadcrumbs_list);
 
 
 /*Задание 4*/
@@ -153,8 +150,8 @@ function show_content($content_list) {
 }
 
 
-/*Задание 5, 6*/
 
+/*Задание 5, 6*/
 
 $users_list = array(
     array(
@@ -228,8 +225,8 @@ function show_users($users_list)
 }
 
 
-/*Задание 7*/
 
+/*Задание 7*/
 
 function db_query()
 {
@@ -240,8 +237,6 @@ function db_query()
 
     $link = mysqli_connect($host, $user, $pass, $name);
     mysqli_query($link, "SET NAMES 'utf8'");
-
-//    $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
 
     return $link;
 }
@@ -277,28 +272,11 @@ function show_users_from_db()
 
     show_users($users_list);
 
-//    foreach ($users as $user) {
-//        echo "
-//	        <div class='$user[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
-//	            <img src='$user[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
-//	            <div class='ml-2 mr-3'>
-//	                <h5 class='m-0'>
-//	                    $user[name] ($user[technology_stack])
-//	                    <small class='m-0 fw-300'>
-//	                        $user[position]
-//	                    </small>
-//	                </h5>
-//	                <a href='$user[social_1_name]' class='text-info fs-sm' target='_blank'>$user[social_1_name]</a> -
-//	                <a href='$user[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
-//	            </div>
-//	        </div>
-//    	";
-//    }
 }
 
 
-/*Задание 8*/
 
+/*Задание 8*/
 
 	function show_users_table() {
 
@@ -315,13 +293,6 @@ function show_users_from_db()
         	$user_last_name = $fullname[0];
         	$user_nick_name = $list_item['social_1_name'];
         	$user_id = $list_item['id'];
-
-//        	echo '<pre>';
-//        	var_dump($first_name);
-//        	var_dump($last_name);
-//        	var_dump($user_name);
-//        	var_dump($user_id);
-//        	echo '</pre>';
 
         	echo "
         	    <tr>
@@ -342,11 +313,10 @@ function show_users_from_db()
     }
 
 
-/*Задание 9*/
 
+/*Задание 9, 10*/
 
 session_start();
-
 
 function get_message_from_db($message)
 {
