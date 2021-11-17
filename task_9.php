@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +40,14 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <div class="alert alert-danger fade show" role="alert">
-                                        You should check in on some of those fields below.
-                                    </div>
-                                    <form action="">
+                                    <?php if(isset($_SESSION['error'])) : ?>
+                                        <div class="alert alert-danger fade show" role="alert">
+                                            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                                        </div>
+                                    <?php endif ?>
+                                    <form action="functions.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" class="form-control" name="some_text_field">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>

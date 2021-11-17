@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +25,6 @@
     </head>
     <body class="mod-bg-1 mod-nav-link ">
         <main id="js-page-content" role="main" class="page-content">
-
             <div class="col-md-6">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
@@ -35,9 +40,14 @@
                         <div class="panel-content">
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <form action="">
+                                    <?php if(isset($_SESSION['error'])) : ?>
+                                        <div class="alert alert-danger fade show" role="alert">
+                                            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                                        </div>
+                                    <?php endif ?>
+                                    <form action="functions.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
+                                        <input type="text" id="simpleinput" class="form-control" name="some_text_field">
                                         <button class="btn btn-success mt-3">Submit</button>
                                     </form>
                                 </div>
