@@ -1,7 +1,6 @@
 <?php
 
 
-
 /*Задание 1*/
 
 $filter_list = array('Reports', 'Analytics', 'Export', 'Storage');
@@ -31,13 +30,13 @@ function show_filter_list($filter_list)
 {
     foreach ($filter_list as $list_item) { ?>
 		<li class="list-group-item">
-            <span data-filter-tags="<?php echo $list_item['tags']; ?>"><?php
+            <span data-filter-tags="<?php
+            echo $list_item['tags']; ?>"><?php
                 echo $list_item['title']; ?></span>
 		</li>
         <?php
     }
 }
-
 
 
 /*Задание 2*/
@@ -65,7 +64,6 @@ function show_posts($posts_list)
         <?php
     }
 }
-
 
 
 /*Задание 3*/
@@ -98,45 +96,43 @@ function show_breadcrumbs($breadcrumbs_list)
 }
 
 
-
 /*Задание 4*/
 
 $content_list = array(
-	array(
-        'title' => 'My Tasks',
-        'data' => '130 / 500',
-        'class' => 'progress-bar bg-fusion-400',
-        'style' => 'width: 65%;',
+    array(
+        'title'         => 'My Tasks',
+        'data'          => '130 / 500',
+        'class'         => 'progress-bar bg-fusion-400',
+        'style'         => 'width: 65%;',
         'aria-valuenow' => '65',
     ),
     array(
-        'title' => 'Transfered',
-        'data' => '440 TB',
-        'class' => 'progress-bar bg-success-500',
-        'style' => 'width: 34%;',
+        'title'         => 'Transfered',
+        'data'          => '440 TB',
+        'class'         => 'progress-bar bg-success-500',
+        'style'         => 'width: 34%;',
         'aria-valuenow' => '34',
     ),
     array(
-        'title' => 'Bugs Squashed',
-        'data' => '77%',
-        'class' => 'progress-bar bg-info-400',
-        'style' => 'width: 77%;',
+        'title'         => 'Bugs Squashed',
+        'data'          => '77%',
+        'class'         => 'progress-bar bg-info-400',
+        'style'         => 'width: 77%;',
         'aria-valuenow' => '77',
     ),
     array(
-        'title' => 'User Testing',
-        'data' => '7 days',
-        'class' => 'progress-bar bg-primary-300',
-        'style' => 'width: 84%;',
+        'title'         => 'User Testing',
+        'data'          => '7 days',
+        'class'         => 'progress-bar bg-primary-300',
+        'style'         => 'width: 84%;',
         'aria-valuenow' => '184',
     ),
 );
 
-function show_content($content_list) {
-
-	foreach ($content_list as $list_item) {
-
-		echo "
+function show_content($content_list)
+{
+    foreach ($content_list as $list_item) {
+        echo "
             <div class='d-flex mt-2'>
                 $list_item[title]
                 <span class='d-inline-block ml-auto'>$list_item[data]</span>
@@ -145,10 +141,8 @@ function show_content($content_list) {
                 <div class='$list_item[class]' role='progressbar' style='$list_item[style]' aria-valuenow='{$list_item['aria-valuenow']}' aria-valuemin='0' aria-valuemax='100'></div>
             </div>
 		";
-
-	}
+    }
 }
-
 
 
 /*Задание 5, 6*/
@@ -204,8 +198,7 @@ $users_list = array(
 function show_users($users_list)
 {
     foreach ($users_list as $list_item) {
-
-    	echo "
+        echo "
 	        <div class='$list_item[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
 	            <img src='$list_item[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
 	            <div class='ml-2 mr-3'>
@@ -220,10 +213,8 @@ function show_users($users_list)
 	            </div>
 	        </div>
     	";
-    	
     }
 }
-
 
 
 /*Задание 7*/
@@ -271,30 +262,27 @@ function show_users_from_db()
     $users_list = get_users_from_db();
 
     show_users($users_list);
-
 }
-
 
 
 /*Задание 8*/
 
-	function show_users_table() {
+function show_users_table()
+{
+    $users_list  = get_users_from_db();
+    $row_counter = 0;
 
-        $users_list = get_users_from_db();
-        $row_counter = 0;
+    foreach ($users_list as $list_item) {
+        ++$row_counter;
 
-        foreach ($users_list as $list_item) {
+        $fullname = explode(' ', $list_item['name']);
 
-            ++$row_counter;
+        $user_first_name = $fullname[1];
+        $user_last_name  = $fullname[0];
+        $user_nick_name  = $list_item['social_1_name'];
+        $user_id         = $list_item['id'];
 
-        	$fullname = explode(' ', $list_item['name']);
-
-        	$user_first_name = $fullname[1];
-        	$user_last_name = $fullname[0];
-        	$user_nick_name = $list_item['social_1_name'];
-        	$user_id = $list_item['id'];
-
-        	echo "
+        echo "
         	    <tr>
                     <th scope='row'>$row_counter</th>
                     <td>$user_last_name</td>
@@ -307,16 +295,11 @@ function show_users_from_db()
                     </td>
                 </tr>
         	";
-
-        }
-
     }
-
+}
 
 
 /*Задание 9, 10*/
-
-session_start();
 
 function get_message_from_db($message)
 {
@@ -341,6 +324,8 @@ function add_message_to_db($message)
 
 function set_flash_message($name, $message)
 {
+    session_start();
+
     $_SESSION[$name] = $message;
 }
 
