@@ -45,7 +45,7 @@ session_start();
                                             <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                                         </div>
                                     <?php endif ?>
-                                    <form action="functions.php" method="post">
+                                    <form action="send_form.php" method="post">
                                         <label class="form-label" for="simpleinput">Text</label>
                                         <input type="text" id="simpleinput" class="form-control" name="some_text_field">
                                         <button class="btn btn-success mt-3">Submit</button>
