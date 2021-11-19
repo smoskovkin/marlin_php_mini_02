@@ -3,9 +3,6 @@
 
 /*Задание 1*/
 
-$filter_list = array('Reports', 'Analytics', 'Export', 'Storage');
-
-
 $filter_list = array(
     array(
         'title' => 'Reports',
@@ -25,16 +22,14 @@ $filter_list = array(
     ),
 );
 
-
 function show_filter_list($filter_list)
 {
-    foreach ($filter_list as $list_item) { ?>
-		<li class="list-group-item">
-            <span data-filter-tags="<?php
-            echo $list_item['tags']; ?>"><?php
-                echo $list_item['title']; ?></span>
-		</li>
-        <?php
+    foreach ($filter_list as $list_item) {
+        echo "
+		    <li class=list-group-item>
+			    <span data-filter-tags='{$list_item['tags']}'>{$list_item['title']}</span>
+		    </li>
+	    ";
     }
 }
 
@@ -56,43 +51,51 @@ $posts_list = array(
 
 function show_posts($posts_list)
 {
-    foreach ($posts_list as $list_item) { ?>
-		<h2><?php
-            echo $list_item['header']; ?></h2>
-		<p class="mb-g"><?php
-            echo $list_item['content']; ?></p>
-        <?php
+    foreach ($posts_list as $list_item) {
+        echo "
+	        <h2>{$list_item['header']}</h2>
+	        <p class='mb-g'>{$list_item['content']}</p>
+	    ";
     }
 }
 
 
 /*Задание 3*/
 
-$breadcrumbs_list = array('Главная', 'PHP', 'Функции', 'implode');
+$breadcrumbs_list = array(
+    array(
+        'title' => 'Главная',
+        'link'  => 'homepage.php',
+    ),
+    array(
+        'title' => 'PHP',
+        'link'  => 'php.php',
+    ),
+    array(
+        'title' => 'Функции',
+        'link'  => 'functions.php',
+    ),
+    array(
+        'title' => 'implode',
+        'link'  => 'implode.php',
+    ),
+
+);
 
 function show_breadcrumbs($breadcrumbs_list)
 {
-    $numItems = count($breadcrumbs_list);
-    $i        = 0; ?>
+    echo '<ol class="breadcrumb page-breadcrumb">';
 
-	<ol class="breadcrumb page-breadcrumb"> <?php
+    foreach ($breadcrumbs_list as $list_item) {
+        if ($list_item != end($breadcrumbs_list)) {
+            echo "<li class='breadcrumb-item'><a href='{$list_item['link']}'>{$list_item['title']}</a></li>";
+            continue;
+        }
 
-        foreach ($breadcrumbs_list as $list_item) {
-            if ((++$i == $numItems)) { ?>
-				<li class="breadcrumb-item active"><?php
-                    echo $list_item; ?></li>
-                <?php
-                break;
-            } ?>
+        echo "<li class='breadcrumb-item'>{$list_item['title']}</li>";
+    }
 
-			<li class="breadcrumb-item"><a href="#"><?php
-                    echo $list_item; ?></a></li>
-            <?php
-        } ?>
-
-	</ol>
-
-    <?php
+    echo '</ol>';
 }
 
 
@@ -134,11 +137,11 @@ function show_content($content_list)
     foreach ($content_list as $list_item) {
         echo "
             <div class='d-flex mt-2'>
-                $list_item[title]
-                <span class='d-inline-block ml-auto'>$list_item[data]</span>
+                {$list_item['title']}
+                <span class='d-inline-block ml-auto'>{$list_item['data']}</span>
             </div>
             <div class='progress progress-sm mb-3'>
-                <div class='$list_item[class]' role='progressbar' style='$list_item[style]' aria-valuenow='{$list_item['aria-valuenow']}' aria-valuemin='0' aria-valuemax='100'></div>
+                <div class='{$list_item['class']}' role='progressbar' style='{$list_item['style']}' aria-valuenow='{$list_item['aria-valuenow']}' aria-valuemin='0' aria-valuemax='100'></div>
             </div>
 		";
     }
@@ -157,7 +160,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@myplaneticket',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/myorange',
-        'banned_status'    => '',
+        'is_banned'        => false,
     ),
     array(
         'photo'            => 'img/demo/authors/josh.png',
@@ -168,7 +171,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@atlantez',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/Walapa',
-        'banned_status'    => 'banned',
+        'is_banned'        => true,
     ),
     array(
         'photo'            => 'img/demo/authors/jovanni.png',
@@ -179,7 +182,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@lodev09',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/lodev09',
-        'banned_status'    => 'banned',
+        'is_banned'        => false,
     ),
     array(
         'photo'            => 'img/demo/authors/roberto.png',
@@ -190,7 +193,7 @@ $users_list = array(
         'social_1_link'    => 'https://twitter.com/@sildur',
         'social_2_name'    => '',
         'social_2_link'    => 'https://wrapbootstrap.com/user/sildur',
-        'banned_status'    => 'banned',
+        'is_banned'        => true,
     ),
 );
 
@@ -199,17 +202,17 @@ function show_users($users_list)
 {
     foreach ($users_list as $list_item) {
         echo "
-	        <div class='$list_item[banned_status] rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
-	            <img src='$list_item[photo]' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
+	        <div class='".($list_item['is_banned'] ? 'banned ' : '')."rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0'>
+	            <img src='{$list_item['photo']}' alt='Jos K.' class='img-thumbnail img-responsive rounded-circle' style='width:5rem; height: 5rem;'>
 	            <div class='ml-2 mr-3'>
 	                <h5 class='m-0'>
-	                    $list_item[name] ($list_item[technology_stack])
+	                    {$list_item['name']} ({$list_item['technology_stack']})
 	                    <small class='m-0 fw-300'>
-	                        $list_item[position]
+	                        {$list_item['position']}
 	                    </small>
 	                </h5>
-	                <a href='$list_item[social_1_name]' class='text-info fs-sm' target='_blank'>$list_item[social_1_name]</a> -
-	                <a href='$list_item[social_2_link]' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
+	                <a href='{$list_item['social_1_name']}' class='text-info fs-sm' target='_blank'>{$list_item['social_1_name']}</a> -
+	                <a href='{$list_item['social_2_link']}' class='text-info fs-sm' target='_blank' title='Contact Jos'><i class='fal fa-envelope'></i></a>
 	            </div>
 	        </div>
     	";
