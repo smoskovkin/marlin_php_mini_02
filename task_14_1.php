@@ -42,7 +42,7 @@ session_start();
                             <div class="panel-content">
                                 <div class="form-group">
                                     <div class="alert alert-success fade show" role="alert">
-                                        Здравствуйте, <?php echo $_SESSION['user']['email']; unset($_SESSION['user']); ?>.
+                                        Здравствуйте, <?php echo $_SESSION['user']['email']; ?>.
                                     </div>
                                     <a href="./task_14.php" class="btn btn-info">Выйти</a>
                                 </div>
@@ -52,7 +52,7 @@ session_start();
                 </div>
             </div>
         </main>
-        
+
 
         <script src="js/vendors.bundle.js"></script>
         <script src="js/app.bundle.js"></script>
