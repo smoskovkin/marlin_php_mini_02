@@ -57,7 +57,7 @@ if (isset($_FILES['img_input'])) {
 $upload_dir = './uploads/';
 
 $current_link = $image['tmp_name'];
-$new_link     = $upload_dir.$image['name'];
+$new_link     = $upload_dir.uniqid().'_'.$image['name'];
 
 move_uploaded_file($current_link, $new_link);
 
