@@ -22,7 +22,6 @@ function set_images_links () {
     $sql_query = "SELECT * FROM images ORDER BY id DESC LIMIT 3";
 
     $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
-g
     foreach ($result as $image) {
         $images_links[] = $image['link'];
     }
