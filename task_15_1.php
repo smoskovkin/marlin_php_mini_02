@@ -30,7 +30,13 @@ function set_images_links()
 }
 
 
+$images_links = set_images_links();
+
+
 ?>
+
+
+
 
 
 
@@ -74,7 +80,7 @@ function set_images_links()
                                         <form action="">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
-                                            <input type="file" id="simpleinput" class="form-control" name="img_input">
+                                            <input type="file" id="simpleinput" class="form-control" name="file">
                                             </div>
                                             <button class="btn btn-success mt-3">Submit</button>
                                         </form>
@@ -100,8 +106,6 @@ function set_images_links()
                             <div class="panel-content">
                                 <div class="panel-content image-gallery">
                                     <div class="row">
-
-                                        <?php $images_links = set_images_links(); ?>
 
                                         <?php if($images_links) : ?>
 

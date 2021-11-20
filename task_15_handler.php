@@ -33,26 +33,31 @@ function redirect_to($path)
 }
 
 
-if (isset($_FILES['img_input'])) {
-    $image = $_FILES['img_input'];
+if (isset($_FILES['images'])) {
+    $images = $_FILES['images'];
 } else {
-    die('Файл не был загружен');
+    die('Файлы не были загружены');
 }
 
 
+
 $upload_dir = './uploads/';
-$path_parts = pathinfo($image['name']);
 
-$current_link = $image['tmp_name'];
-$new_link     = $upload_dir.$path_parts['filename'].'_'.uniqid().'.'.$path_parts['extension'];
+for ($i = 0; $i < count($images['name']); $i++) {
 
-move_uploaded_file($current_link, $new_link);
+    $path_parts = pathinfo($images['name'][$i]);
+
+    $current_link = $images['tmp_name'][$i];
+    $new_link     = $upload_dir.$path_parts['filename'].'_'.uniqid().'.'.$path_parts['extension'];
+
+    move_uploaded_file($current_link, $new_link);
 
 
-add_image_link_to_db($new_link);
+    add_image_link_to_db($new_link);
+}
 
 
-unset($_FILES['img_input']);
+unset($_FILES['images']);
 
 
 redirect_to('./task_15.php');
