@@ -44,7 +44,7 @@ session_start();
                                     <div class="alert alert-success fade show" role="alert">
                                         Здравствуйте, <?php echo $_SESSION['user']['email']; ?>.
                                     </div>
-                                    <a href="./task_14.php" class="btn btn-info">Выйти</a>
+                                    <a href="./task_14_1_logout.php" class="btn btn-info">Выйти</a>
                                 </div>
                             </div>
                         </div>
