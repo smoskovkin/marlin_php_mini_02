@@ -23,7 +23,7 @@ function set_images_links()
 
     $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
     foreach ($result as $image) {
-        $images_links[] = $image['link'];
+        $images_links[] = $image;
     }
 
     return $images_links;
@@ -107,8 +107,8 @@ function set_images_links()
 
                                             <?php foreach ($images_links as $image_link) : ?>
 			                                    <div class="col-md-3 image">
-				                                    <img src="<?php echo $image_link; ?>">
-				                                    <a href="task_15_1_handler.php" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
+				                                    <img src="<?php echo $image_link['link']; ?>">
+				                                    <a href="task_15_1_handler.php?<?php echo 'id='.$image_link['id'].'&link='.$image_link['link']; ?>" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
 			                                    </div>
                                             <?php endforeach; ?>
 

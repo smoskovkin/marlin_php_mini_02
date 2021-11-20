@@ -23,7 +23,7 @@ function set_images_links()
 
     $result = mysqli_query($link, $sql_query) or die(mysqli_error($link));
     foreach ($result as $image) {
-        $images_links[] = $image['link'];
+        $images_links[] = $image;
     }
 
     return $images_links;
@@ -106,7 +106,7 @@ function set_images_links()
 
 		                                    <?php foreach ($images_links as $image_link) : ?>
 			                                    <div class="col-md-3 image">
-				                                    <img src="<?php echo $image_link; ?>">
+				                                    <img src="<?php echo $image_link['link']; ?>">
 			                                    </div>
 	                                        <?php endforeach; ?>
 
