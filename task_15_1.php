@@ -33,6 +33,7 @@ function set_images_links()
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +71,7 @@ function set_images_links()
                             <div class="panel-content">
                                 <div class="panel-content">
                                     <div class="form-group">
-                                        <form action="task_15_handler.php" method="post" enctype=multipart/form-data>
+                                        <form action="">
                                             <div class="form-group">
                                                 <label class="form-label" for="simpleinput">Image</label>
                                             <input type="file" id="simpleinput" class="form-control" name="img_input">
@@ -100,29 +101,33 @@ function set_images_links()
                                 <div class="panel-content image-gallery">
                                     <div class="row">
 
-	                                    <?php $images_links = set_images_links(); ?>
+                                        <?php $images_links = set_images_links(); ?>
 
-	                                    <?php if($images_links) : ?>
+                                        <?php if($images_links) : ?>
 
-		                                    <?php foreach ($images_links as $image_link) : ?>
+                                            <?php foreach ($images_links as $image_link) : ?>
 			                                    <div class="col-md-3 image">
 				                                    <img src="<?php echo $image_link; ?>">
+				                                    <a href="task_15_1_handler.php" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
 			                                    </div>
-	                                        <?php endforeach; ?>
+                                            <?php endforeach; ?>
 
-	                                    <?php else : ?>
+                                        <?php else : ?>
 
-		                                    <div class="col-md-3 image">
-			                                    <img src="img/demo/gallery/1.jpg">
-		                                    </div>
-		                                    <div class="col-md-3 image">
-			                                    <img src="img/demo/gallery/2.jpg">
-		                                    </div>
-		                                    <div class="col-md-3 image">
-			                                    <img src="img/demo/gallery/3.jpg">
-		                                    </div>
+	                                        <div class="col-md-3 image">
+		                                        <img src="img/demo/gallery/1.jpg">
+		                                        <a href="task_15_1_handler.php" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
+	                                        </div>
+	                                        <div class="col-md-3">
+		                                        <img src="img/demo/gallery/2.jpg">
+		                                        <a href="task_15_1_handler.php" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
+	                                        </div>
+	                                        <div class="col-md-3">
+		                                        <img src="img/demo/gallery/3.jpg">
+		                                        <a href="task_15_1_handler.php" class="btn btn-danger" onclick="confirm('Вы уверены?');">Удалить</a>
+	                                        </div>
 
-	                                    <?php endif; ?>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
