@@ -4,24 +4,32 @@
 function db_query()
 {
     $host = 'localhost';
+    $db = 'marlin-mini-2';
     $user = 'root';
     $pass = '';
-    $name = 'marlin-mini-2';
+    $charset = 'utf8';
 
-    $link = mysqli_connect($host, $user, $pass, $name);
-    mysqli_query($link, "SET NAMES 'utf8'");
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $opt = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
 
-    return $link;
+    $pdo = new PDO($dsn, $user, $pass, $opt);
+
+    return $pdo;
 }
 
 
 function add_image_link_to_db($new_link)
 {
-    $link = db_query();
+    $pdo = db_query();
 
     $sql_query = "INSERT INTO images (link) VALUES ('$new_link')";
 
-    mysqli_query($link, $sql_query) or die(mysqli_error($link));
+    $stmt = $pdo->prepare($sql_query);
+    $stmt->execute();
 }
 
 

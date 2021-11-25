@@ -3,10 +3,10 @@
 
 function db_query()
 {
-    $host    = 'localhost';
-    $db      = 'marlin-mini-2';
-    $user    = 'root';
-    $pass    = '';
+    $host = 'localhost';
+    $db = 'marlin-mini-2';
+    $user = 'root';
+    $pass = '';
     $charset = 'utf8';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -24,14 +24,14 @@ function db_query()
 
 function set_images_links()
 {
-    $pdo = db_query();
+    $link = db_query();
 
     $sql_query = "SELECT * FROM images ORDER BY id DESC LIMIT 3";
 
-    $stmt = $pdo->prepare($sql_query);
-    $stmt->execute();
+    $stmt = $pdo->prepare('SELECT * FROM images WHERE email = :email');
+    $stmt->execute(array('email' => $email));
 
-    $row = $stmt->fetchAll(PDO::FETCH_UNIQUE);
+    $row = $stmt->fetch(PDO::FETCH_LAZY);
 
     foreach ($row as $image) {
         $images_links[] = $image;
